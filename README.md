@@ -13,9 +13,7 @@
 
 # Circuit Diagram:
 
----
-To upload
---
+<img width="673" height="598" alt="image" src="https://github.com/user-attachments/assets/4f840ad0-3c22-4b93-ba87-30871503c787" />
 
 # Procedure // Modify the procedure based on your circuit
 
@@ -57,12 +55,70 @@ Step 7: Save Your Work
 
 # Program
 
----
-To upload
+const int analogIn = A0;
+
+int humiditysensorOutput = 0;
+
+// Defining Variables
+
+int RawValue= 0;
+
+double Voltage = 0;
+
+double tempC = 0;
+
+double tempF = 0;
+
+void setup(){
+
+ Serial.begin(9600);
+ 
+ pinMode(A1, INPUT);
+}
+
+void loop(){
+
+ RawValue = analogRead(analogIn);
+ 
+ Voltage = (RawValue / 1023.0) * 5000; // 5000 to get millivots.
+ 
+ tempC = (Voltage-500) * 0.1; // 500 is the offset
+ 
+ tempF = (tempC * 1.8) + 32; // convert to F
+ 
+ Serial.print("Raw Value = " );
+ 
+ Serial.print(RawValue);
+ 
+ Serial.print("\t milli volts = ");
+ 
+ Serial.print(Voltage,0); //
+ 
+ Serial.print("\t Temperature in C = ");
+ 
+ Serial.print(tempC,1);
+ 
+ Serial.print("\t Temperature in F = ");
+ 
+ Serial.println(tempF,1);
+ 
+ humiditysensorOutput = analogRead(A1);
+ 
+ Serial.print("Humidity: "); // Printing out Humidity Percentage
+ 
+ Serial.print(map(humiditysensorOutput, 0, 1023, 10, 70));
+ 
+ Serial.println("%");
+ 
+ delay(5000); //iterate every 5 seconds
+ 
+}
+
+Output
 --
+<img width="1010" height="247" alt="image" src="https://github.com/user-attachments/assets/87446539-d546-45d2-8047-8a34368eb811" />
+
 
 # Result
+The experiment to measure the temperature using the DHT11/DHT22/TMP36 sensor with Arduino UNO on Tinkercad has been successfully completed and verified. The system was able to accurately sense and display temperature (in both Celsius and Fahrenheit) and humidity values through the Arduino serial monitor. All procedure steps, including hardware setup, circuit simulation, and code validation, were performed as planned. The experimental results confirm the circuit and program function as intended.
 
----
-To upload
---
